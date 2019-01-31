@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--提供服务方的服务名-->
+    <dubbo:application name="dubbo-server-provider" owner="liulei"/>
+    <!-- zookeeper作为注册中心 -->
+    <dubbo:registry address="zookeeper://192.168.1.121:2181?backup=192.168.1.122:2181,192.168.1.123:2181,192.168.1.124:2181"/>
+
+    <!--当前服务发布所依赖的协议；webserovice、Thrift、Hessain、http-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!--服务发布的配置，需要暴露的服务接口-->
+    <dubbo:service interface="com.liulei.ISayHello" ref="sayHello"/>
+
+    <!--Bean bean定义-->
+    <bean id="sayHello" class="com.liulei.SayHelloImpl"/>
+
+</beans>
