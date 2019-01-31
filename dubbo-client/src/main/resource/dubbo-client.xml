@@ -7,13 +7,13 @@
     <!--当前项目在整个分布式架构里面的唯一名称，计算依赖关系的标签-->
     <dubbo:application name="dubbo-client" owner="liulei"/>
 
-    <!--dubbo这个服务所要暴露的服务地址所对应的注册中心-->
+    <!--dubbo这个服务所要暴露的服务地址所对应的注册中心; file标签可以将监听信息缓存到指定path（以保障注册中心挂了，服务可以照常使用）-->
     <dubbo:registry address="zookeeper://192.168.1.121:2181?backup=192.168.1.122:2181,192.168.1.123:2181,192.168.1.124:2181"/>
 
     <!--当前服务发布所依赖的协议；webserovice、Thrift、Hessain、http-->
-    <dubbo:protocol name="dubbo" port="20880"/>
+   <!-- <dubbo:protocol name="dubbo" port="20880"/>-->
 
     <!--生成一个远程服务的调用代理-->
-    <dubbo:reference id="sayHello" interface="com.liulei.ISayHello"/>
+    <dubbo:reference id="sayHello" interface="com.liulei.ISayHello" protocol="dubbo"/>
 
 </beans>
